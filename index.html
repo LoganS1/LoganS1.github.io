@@ -347,6 +347,29 @@
       gap: 8px;
     }
 
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 22px;
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--amber);
+      background: transparent;
+      border: 1px solid var(--amber);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .project-link:hover {
+      background: var(--amber);
+      color: var(--on-amber);
+    }
+
     .tag {
       padding: 5px 12px;
       border: 1px solid var(--rule-strong);
@@ -753,6 +776,7 @@
             <span class="tag">VPS</span>
             <span class="tag">Freemium</span>
           </div>
+          <a href="https://buzzin.live" target="_blank" rel="noopener" class="project-link">Visit buzzin.live →</a>
         </article>
 
         <article class="project-card half">
