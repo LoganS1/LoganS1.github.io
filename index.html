@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logan Sinclair | Software Engineer</title>
+  <meta name="description" content="Software engineer focused on embedded systems and backend. Currently at Paycom; founder of BuzzIn.Live.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* All fully opaque. No alpha, no gradients. */
+      --ink:        #0b0b14;
+      --ink-card:   #14141f;
+      --ink-hover:  #1c1c2a;
+      --rule:       #25252f;
+      --rule-strong:#3a3a48;
+
+      --amber:      #f59e0b;
+      --amber-warm: #ea7c0a;
+      --amber-deep: #9a3412;
+
+      --cream:      #f5efe2;
+      --cream-dim:  #9c9894;  /* pre-computed 62% blend on ink */
+      --cream-faint:#646262;  /* pre-computed 38% blend on ink */
+
+      /* On-amber text colors */
+      --on-amber:        #1a0f00;
+      --on-amber-dim:    #4a2f0a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--ink);
+      color: var(--cream);
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-weight: 400;
+      letter-spacing: -0.011em;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ── Layout ──────────────────────────────────────── */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    nav {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      padding: 6px;
+      display: flex;
+      gap: 2px;
+      border-radius: 100px;
+      background: var(--ink-card);
+      border: 1px solid var(--rule-strong);
+    }
+
+    .nav-pill {
+      position: absolute;
+      top: 6px;
+      left: 0;
+      width: 0;
+      height: calc(100% - 12px);
+      background: var(--ink-hover);
+      border-radius: 100px;
+      transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1),
+                  width 0.45s cubic-bezier(0.32, 0.72, 0, 1),
+                  opacity 0.3s ease;
+      z-index: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .nav-pill.visible { opacity: 1; }
+
+    nav a {
+      position: relative;
+      z-index: 1;
+      padding: 8px 18px;
+      color: var(--cream-dim);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 100px;
+      transition: color 0.25s ease, background 0.2s ease;
+    }
+
+    nav a:hover { color: var(--amber); background: var(--ink-hover); }
+    nav a.active { color: var(--amber); }
+    nav a.active:hover { background: transparent; }
+
+    @media (max-width: 480px) {
+      nav { padding: 5px; gap: 0; }
+      nav a { padding: 7px 12px; font-size: 12px; }
+      .nav-pill { top: 5px; height: calc(100% - 10px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .nav-pill { transition: opacity 0.2s ease; }
+    }
+
+    section { padding: 110px 0; }
+
+    /* ── Section rule + label ────────────────────────── */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 32px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .section-divider .num {
+      color: var(--amber);
+      font-weight: 500;
+    }
+
+    .section-divider .line {
+      flex: 1;
+      height: 1px;
+      background: var(--rule-strong);
+    }
+
+    .section-divider .label {
+      color: var(--cream-faint);
+    }
+
+    .section-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(44px, 6.5vw, 72px);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.025em;
+      margin-bottom: 52px;
+      color: var(--cream);
+    }
+
+    .section-title em {
+      color: var(--amber);
+      font-style: italic;
+    }
+
+    /* ── Hero ────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 120px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-family: 'Geist Mono', monospace;
+      color: var(--cream-dim);
+      margin-bottom: 36px;
+      letter-spacing: 0.02em;
+      border: 1px solid var(--amber);
+      background: var(--ink-card);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--amber);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50%      { transform: scale(0.65); }
+    }
+
+    h1.name {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(64px, 11vw, 144px);
+      font-weight: 400;
+      line-height: 0.92;
+      letter-spacing: -0.025em;
+      margin-bottom: 36px;
+      color: var(--cream);
+    }
+
+    h1.name .surname {
+      font-style: italic;
+      color: var(--amber);
+    }
+
+    .positioning {
+      font-size: clamp(19px, 2.1vw, 24px);
+      color: var(--cream-dim);
+      max-width: 660px;
+      line-height: 1.45;
+      margin-bottom: 44px;
+      letter-spacing: -0.012em;
+    }
+
+    .positioning .accent {
+      color: var(--amber);
+      font-style: italic;
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.14em;
+    }
+
+    .meta-row {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--cream-faint);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .meta-row .item::before {
+      content: '◆';
+      color: var(--amber);
+      margin-right: 8px;
+      font-size: 8px;
+      vertical-align: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding-top: 100px; padding-bottom: 40px; }
+      .status-pill { margin-bottom: 24px; }
+      h1.name { margin-bottom: 24px; }
+      .positioning { margin-bottom: 28px; font-size: 17px; }
+      .meta-row { gap: 8px 18px; font-size: 10px; }
+      .meta-row .item::before { margin-right: 6px; }
+    }
+
+    /* ── Projects ────────────────────────────────────── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+
+    .project-card {
+      padding: 36px;
+      background: var(--ink-card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--amber);
+      background: var(--ink-hover);
+    }
+
+    .project-card.featured { grid-column: span 12; }
+    .project-card.half     { grid-column: span 6; }
+
+    @media (max-width: 768px) {
+      .project-card.half { grid-column: span 12; }
+      .project-card { padding: 28px; }
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 22px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--cream-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .project-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 36px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+      line-height: 1.04;
+      color: var(--cream);
+    }
+
+    .project-card.featured .project-title { font-size: clamp(40px, 5vw, 56px); }
+
+    .project-desc {
+      color: var(--cream-dim);
+      font-size: 15px;
+      line-height: 1.65;
+      margin-bottom: 26px;
+      max-width: 64ch;
+    }
+
+    .project-stats {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 26px;
+      padding-top: 26px;
+      border-top: 1px solid var(--rule);
+      flex-wrap: wrap;
+    }
+
+    .stat-value {
+      font-family: 'Instrument Serif', serif;
+      font-size: 30px;
+      color: var(--amber);
+      display: block;
+      line-height: 1;
+      margin-bottom: 6px;
+      font-style: italic;
+    }
+
+    .stat-label {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      color: var(--cream-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      padding: 5px 12px;
+      border: 1px solid var(--rule-strong);
+      border-radius: 100px;
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--cream-dim);
+      background: var(--ink);
+      letter-spacing: 0.01em;
+    }
+
+    /* ── About ───────────────────────────────────────── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+
+    .info-card {
+      padding: 40px;
+      background: var(--ink-card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+    }
+
+    @media (max-width: 768px) { .info-card { padding: 30px; } }
+
+    .info-card h3 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 30px;
+      font-weight: 400;
+      margin-bottom: 18px;
+      letter-spacing: -0.015em;
+      color: var(--cream);
+    }
+
+    .info-card h3 em {
+      color: var(--amber);
+      font-style: italic;
+    }
+
+    .info-card p {
+      color: var(--cream-dim);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* ── Experience timeline ─────────────────────────── */
+    .timeline {
+      background: var(--ink-card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .timeline-item {
+      padding: 32px 36px;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 32px;
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.2s ease;
+    }
+
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-item:hover { background: var(--ink-hover); }
+
+    @media (max-width: 768px) {
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 28px;
+      }
+    }
+
+    .timeline-date {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding-top: 8px;
+      white-space: nowrap;
+    }
+
+    .timeline-content h4 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 26px;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      color: var(--cream);
+      margin-bottom: 4px;
+      line-height: 1.15;
+    }
+
+    .timeline-content .org {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--cream-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+
+    .timeline-content .org .sep {
+      color: var(--amber);
+      margin: 0 8px;
+    }
+
+    .timeline-content p {
+      color: var(--cream-dim);
+      font-size: 14px;
+      line-height: 1.65;
+      max-width: 64ch;
+    }
+
+    /* ── Education + Awards split ─────────────────────── */
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) { .split-grid { grid-template-columns: 1fr; } }
+
+    .panel {
+      padding: 36px;
+      background: var(--ink-card);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+    }
+
+    @media (max-width: 768px) { .panel { padding: 28px; } }
+
+    .panel-label {
+      font-family: 'Geist Mono', monospace;
+      font-size: 10px;
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 18px;
+    }
+
+    .panel h3 {
+      font-family: 'Instrument Serif', serif;
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      color: var(--cream);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .panel .sub {
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--cream-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 18px;
+    }
+
+    .panel .sub .sep { color: var(--amber); margin: 0 8px; }
+
+    .panel p {
+      color: var(--cream-dim);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .award-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .award-list li {
+      display: grid;
+      grid-template-columns: 14px 1fr;
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .award-list li::before {
+      content: '✦';
+      color: var(--amber);
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    .award-list .name {
+      font-family: 'Instrument Serif', serif;
+      font-size: 18px;
+      color: var(--cream);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .award-list .detail {
+      display: block;
+      font-family: 'Geist', sans-serif;
+      font-size: 13px;
+      color: var(--cream-dim);
+      margin-top: 2px;
+      line-height: 1.5;
+    }
+
+    /* ── Contact: the amber block ────────────────────── */
+    .contact-section {
+      padding: 0;
+      background: var(--amber);
+      border-top: 1px solid var(--amber-deep);
+    }
+
+    .contact-inner {
+      padding: 110px 28px;
+      text-align: center;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .contact-section .section-divider .num,
+    .contact-section .section-divider .label { color: var(--on-amber-dim); }
+    .contact-section .section-divider .line  { background: var(--on-amber-dim); }
+
+    .contact-section h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(56px, 9vw, 112px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 32px;
+      color: var(--on-amber);
+    }
+
+    .contact-section h2 em {
+      color: var(--cream);
+      font-style: italic;
+    }
+
+    .contact-section .lede {
+      font-size: clamp(18px, 2vw, 22px);
+      color: var(--on-amber-dim);
+      max-width: 480px;
+      margin: 0 auto 44px;
+      line-height: 1.5;
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 26px;
+      border-radius: 100px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      letter-spacing: -0.005em;
+      background: transparent;
+      color: var(--on-amber);
+      border: 1px solid var(--on-amber);
+    }
+
+    .contact-link:hover {
+      transform: translateY(-2px);
+      background: var(--on-amber);
+      color: var(--amber);
+    }
+
+    .contact-link.primary {
+      background: var(--ink);
+      color: var(--amber);
+      border-color: var(--ink);
+    }
+
+    .contact-link.primary:hover {
+      background: var(--cream);
+      color: var(--ink);
+      border-color: var(--cream);
+    }
+
+    /* ── Footer ──────────────────────────────────────── */
+    footer {
+      padding: 40px 0 60px;
+      text-align: center;
+      font-family: 'Geist Mono', monospace;
+      font-size: 11px;
+      color: var(--cream-faint);
+      letter-spacing: 0.05em;
+      background: var(--ink);
+    }
+
+    footer .accent { color: var(--amber); }
+
+    /* ── Entrance ────────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.25s; }
+    .delay-3 { animation-delay: 0.42s; }
+    .delay-4 { animation-delay: 0.58s; }
+
+    ::selection { background: var(--amber); color: var(--ink); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up, .status-dot { animation: none; opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-pill"></span>
+    <a href="#work" data-section="work">Work</a>
+    <a href="#experience" data-section="experience">Experience</a>
+    <a href="#background" data-section="background">Background</a>
+    <a href="#about" data-section="about">About</a>
+    <a href="#contact" data-section="contact">Contact</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="status-pill fade-up delay-1">
+        <span class="status-dot"></span>
+        Open to new roles: embedded, backend, full-stack
+      </div>
+      <h1 class="name fade-up delay-2">
+        Logan<br>
+        <span class="surname">Sinclair.</span>
+      </h1>
+      <p class="positioning fade-up delay-3">
+        Software engineer building <span class="accent">resilient systems</span>, from a payroll engine that touches every paycheck to a real-time quiz platform with 100K+ monthly players.
+      </p>
+      <div class="meta-row fade-up delay-4">
+        <span class="item">Computer Engineer</span>
+        <span class="item">EIT</span>
+        <span class="item">Oklahoma City</span>
+        <span class="item">U.S. Citizen</span>
+        <span class="item">Clearance-Eligible</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work">
+    <div class="container">
+      <div class="section-divider">
+        <span class="num">01</span>
+        <span class="line"></span>
+        <span class="label">Selected Work</span>
+      </div>
+      <h2 class="section-title">Things I've <em>built</em>.</h2>
+
+      <div class="projects-grid">
+        <article class="project-card featured">
+          <div class="project-meta">
+            <span>Founder · Solo build</span>
+            <span>2018 → Present</span>
+          </div>
+          <h3 class="project-title">BuzzIn.Live</h3>
+          <p class="project-desc">
+            Real-time multiplayer quiz platform I built from scratch and have run since 2018. Node.js backend on a VPS, Socket.IO for low-latency game state, NGINX edge proxy, freemium monetization. Grew out of Torpedoed.fun, an earlier multiplayer canvas experiment where I first learned the stack.
+          </p>
+          <div class="project-stats">
+            <div>
+              <span class="stat-value">100K+</span>
+              <span class="stat-label">Monthly players</span>
+            </div>
+            <div>
+              <span class="stat-value">2018</span>
+              <span class="stat-label">Running since</span>
+            </div>
+            <div>
+              <span class="stat-value">1</span>
+              <span class="stat-label">Person team</span>
+            </div>
+          </div>
+          <div class="tech-tags">
+            <span class="tag">Node.js</span>
+            <span class="tag">Socket.IO</span>
+            <span class="tag">NGINX</span>
+            <span class="tag">VPS</span>
+            <span class="tag">Freemium</span>
+          </div>
+        </article>
+
+        <article class="project-card half">
+          <div class="project-meta">
+            <span>Paycom · Software Developer IV</span>
+            <span>2023 → Now</span>
+          </div>
+          <h3 class="project-title">Payroll Engine Modernization</h3>
+          <p class="project-desc">
+            Multi-year team effort porting the central Visual FoxPro payroll engine to .NET 10 with zero downtime. I designed point-in-time snapshotting to eliminate drift between parallel engine runs and extended the CI/CD pipeline to spin up isolated test environments per change.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">C# / .NET 10</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Kubernetes</span>
+            <span class="tag">GitLab CI</span>
+            <span class="tag">FoxPro</span>
+          </div>
+        </article>
+
+        <article class="project-card half">
+          <div class="project-meta">
+            <span>OU ARRC · Undergraduate Assistant</span>
+            <span>2021 → 2022</span>
+          </div>
+          <h3 class="project-title">Radar Control &amp; Telemetry</h3>
+          <p class="project-desc">
+            Built a PyQt utility for radar directional control and coordinate visualization, plus a LabVIEW application polling chiller telemetry over Modbus in real time.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">Python</span>
+            <span class="tag">PyQt</span>
+            <span class="tag">LabVIEW</span>
+            <span class="tag">Modbus</span>
+          </div>
+        </article>
+
+        <article class="project-card half">
+          <div class="project-meta">
+            <span>Big M Construction · Client</span>
+            <span>2018</span>
+          </div>
+          <h3 class="project-title">Static Site &amp; Hiring Portal</h3>
+          <p class="project-desc">
+            Custom-built marketing site for an oil and gas pipeline construction company. Node.js, NGINX, no framework. Later extended with an internal employment application system where applicants could submit and staff could review submissions in a dashboard.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">Node.js</span>
+            <span class="tag">NGINX</span>
+            <span class="tag">Vanilla JS</span>
+          </div>
+        </article>
+
+        <article class="project-card half">
+          <div class="project-meta">
+            <span>University · Embedded</span>
+            <span>2022 → 2023</span>
+          </div>
+          <h3 class="project-title">Embedded Foundations</h3>
+          <p class="project-desc">
+            An MBED-based digital guitar with PLL audio synthesis and register-level work, an analog looping 7-segment display, and a barcode scanner. Coursework, but where the embedded interest started, and the reason I'm still drawn to firmware-adjacent roles.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">MBED</span>
+            <span class="tag">C / C++</span>
+            <span class="tag">PLL</span>
+            <span class="tag">Registers</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-divider">
+        <span class="num">02</span>
+        <span class="line"></span>
+        <span class="label">Experience</span>
+      </div>
+      <h2 class="section-title">Where I've <em>worked</em>.</h2>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">2023 → Present</div>
+          <div class="timeline-content">
+            <h4>Software Developer IV</h4>
+            <div class="org">Paycom <span class="sep">·</span> Oklahoma City, OK</div>
+            <p>
+              Promoted from L3 to L4 in August 2024. Maintain and enhance the central payroll calculation engine used by nearly every payroll process. Contributed to the multi-year team port of the legacy Visual FoxPro engine to .NET 10 with zero operational downtime, designed point-in-time data snapshotting tools for deterministic calculation recreations, and extended CI/CD pipelines to automatically build, containerize, and deploy isolated testing environments per engine change.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">Summer 2022</div>
+          <div class="timeline-content">
+            <h4>Software Developer Intern</h4>
+            <div class="org">Paycom <span class="sep">·</span> Oklahoma City, OK</div>
+            <p>
+              Developed a KPI tracking and visualization application during the summer internship that led to a full-time return offer.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2021 → 2022</div>
+          <div class="timeline-content">
+            <h4>Undergraduate Assistant</h4>
+            <div class="org">OU Advanced Radar Research Center <span class="sep">·</span> Norman, OK</div>
+            <p>
+              Developed PyQt-based graphical utilities for radar directional control, plus a LabVIEW monitoring utility for real-time radar chiller telemetry over Modbus.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2018 → Present</div>
+          <div class="timeline-content">
+            <h4>Founder</h4>
+            <div class="org">BuzzIn.Live <span class="sep">·</span> Online</div>
+            <p>
+              Designed and implemented a real-time multiplayer quiz platform with over 100,000 monthly players worldwide. Full-stack solo build on a VPS: Node.js backend, NGINX proxy, Socket.IO communication, freemium monetization.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2018</div>
+          <div class="timeline-content">
+            <h4>Full-Stack Webmaster</h4>
+            <div class="org">Big M Construction <span class="sep">·</span> Weatherford, OK</div>
+            <p>
+              Built a custom marketing site for an oil and gas pipeline construction company. Collaborated directly with the client on the design, then extended the site with an internal employment application system for applicant submission and staff review.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">Summers 2019 → 2021</div>
+          <div class="timeline-content">
+            <h4>Farm Equipment Operator</h4>
+            <div class="org">Sinclair Farms <span class="sep">·</span> Eagle City, OK</div>
+            <p>
+              Summers spent operating heavy machinery (tractors, combines, sprayers), maintaining and repairing equipment, and caring for livestock. Hands-on hardware experience that grounds my interest in embedded systems work.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education + Awards -->
+  <section id="background">
+    <div class="container">
+      <div class="section-divider">
+        <span class="num">03</span>
+        <span class="line"></span>
+        <span class="label">Background</span>
+      </div>
+      <h2 class="section-title">Education &amp; <em>honors</em>.</h2>
+
+      <div class="split-grid">
+        <div class="panel">
+          <div class="panel-label">Education</div>
+          <h3>B.S. Computer Engineering</h3>
+          <div class="sub">University of Oklahoma <span class="sep">·</span> Gallogly College of Engineering <span class="sep">·</span> May 2023</div>
+          <p>
+            Norman, OK. Coursework spanning Microprocessor System Design, Digital Design, Computer Architecture, and Signals &amp; Systems: the foundation behind the MBED guitar, looping 7-segment display, and barcode scanner projects.
+          </p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-label">Awards &amp; Honors</div>
+          <ul class="award-list">
+            <li>
+              <div>
+                <span class="name">Engineer Intern (EI), Oklahoma</span>
+                <span class="detail">Passed the NCEES Fundamentals of Engineering exam, February 2026. Certified by the Oklahoma State Board of Licensure for Professional Engineers. First step toward Professional Engineer (PE) licensure.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <span class="name">Graduated with Special Distinction</span>
+                <span class="detail">University of Oklahoma's institutional honor at graduation, May 2023. 3.95 cumulative GPA from the Gallogly College of Engineering.</span>
+              </div>
+            </li>
+            <li>
+              <div>
+                <span class="name">Eagle Scout &amp; Order of the Arrow</span>
+                <span class="detail">Boy Scouts of America. Led an Eagle project restoring local public trail signage; inducted into the Order of the Arrow, the BSA's national honor society.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="section-divider">
+        <span class="num">04</span>
+        <span class="line"></span>
+        <span class="label">About</span>
+      </div>
+      <h2 class="section-title">A bit <em>more</em>.</h2>
+      <div class="two-col">
+        <div class="info-card">
+          <h3>The <em>short</em> version</h3>
+          <p>
+            Computer engineering grad from the University of Oklahoma. Currently a Level IV software developer at Paycom, working on the calculation engine that runs payroll for the company's entire client base. On the side, I run BuzzIn.Live, a multiplayer quiz platform I've maintained since 2018.
+          </p>
+        </div>
+        <div class="info-card">
+          <h3>What I'm <em>looking</em> for</h3>
+          <p>
+            Embedded roles are my top interest; backend and full-stack are a strong parallel track, and I'm open to AI-adjacent infrastructure work where it overlaps. Looking at OKC, in-office or hybrid. U.S. citizen, eligible for security clearance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact: full amber block -->
+  <section id="contact" class="contact-section">
+    <div class="contact-inner">
+      <div class="section-divider">
+        <span class="num">05</span>
+        <span class="line"></span>
+        <span class="label">Get in touch</span>
+      </div>
+      <h2>Let's <em>talk</em>.</h2>
+      <p class="lede">The fastest way to reach me is email. I read everything.</p>
+      <div class="contact-links">
+        <a href="mailto:IAmLoganSinclair@Gmail.com" class="contact-link primary">
+          IAmLoganSinclair@Gmail.com →
+        </a>
+        <a href="https://www.linkedin.com/in/loganasinclair/" target="_blank" rel="noopener" class="contact-link">LinkedIn</a>
+        <a href="https://github.com/LoganS1" target="_blank" rel="noopener" class="contact-link">GitHub</a>
+        <a href="resume.pdf" target="_blank" rel="noopener" class="contact-link">Résumé (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 LOGAN SINCLAIR
+  </footer>
+
+  <script>
+    (function () {
+      const nav = document.querySelector('nav');
+      if (!nav) return;
+
+      const pill = nav.querySelector('.nav-pill');
+      const links = Array.from(nav.querySelectorAll('a[data-section]'));
+      const items = links
+        .map(link => ({ link, section: document.getElementById(link.dataset.section) }))
+        .filter(item => item.section);
+
+      let currentLink = null;
+
+      function setPill(link) {
+        if (!link) {
+          pill.classList.remove('visible');
+          return;
+        }
+        const linkRect = link.getBoundingClientRect();
+        const navRect = nav.getBoundingClientRect();
+        pill.style.transform = `translateX(${linkRect.left - navRect.left}px)`;
+        pill.style.width = `${linkRect.width}px`;
+        pill.classList.add('visible');
+      }
+
+      function setActive(link) {
+        if (currentLink === link) return;
+        if (currentLink) currentLink.classList.remove('active');
+        if (link) link.classList.add('active');
+        currentLink = link;
+        setPill(link);
+      }
+
+      function update() {
+        const triggerY = window.scrollY + window.innerHeight * 0.35;
+        let active = null;
+        for (const { link, section } of items) {
+          if (section.offsetTop <= triggerY) active = link;
+        }
+        setActive(active);
+      }
+
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => { update(); ticking = false; });
+          ticking = true;
+        }
+      }, { passive: true });
+
+      window.addEventListener('resize', () => {
+        if (currentLink) setPill(currentLink);
+      });
+
+      // Initial position
+      update();
+    })();
+  </script>
+</body>
+</html>
