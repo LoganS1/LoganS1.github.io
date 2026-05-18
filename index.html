@@ -918,7 +918,7 @@
           </div>
           <h3 class="project-title">BuzzIn.Live</h3>
           <p class="project-desc">
-            Real-time multiplayer quiz platform I built from scratch and have run since 2018. Node.js backend on a VPS, Socket.IO for low-latency game state, NGINX edge proxy, freemium monetization. Grew out of Torpedoed.fun, an earlier multiplayer canvas experiment where I first learned the stack.
+            Real-time multiplayer quiz platform built from scratch and run since 2018. A multi-user game system for quick "quiz-bowl" style games, full-stack on a VPS: Node.js backend, NGINX proxy, Socket.IO communication. Ran on a freemium model for several years before being converted to fully free in July 2025.
           </p>
           <div class="project-stats">
             <div>
@@ -939,7 +939,7 @@
             <span class="tag">Socket.IO</span>
             <span class="tag">NGINX</span>
             <span class="tag">VPS</span>
-            <span class="tag">Freemium</span>
+            <span class="tag">Free to Play</span>
           </div>
           <a href="https://buzzin.live" target="_blank" rel="noopener" class="project-link">Visit buzzin.live →</a>
         </article>
@@ -951,7 +951,7 @@
           </div>
           <h3 class="project-title">Payroll Engine Modernization</h3>
           <p class="project-desc">
-            Multi-year team effort porting the central Visual FoxPro payroll engine to .NET 10 with zero downtime. I designed point-in-time snapshotting to eliminate drift between parallel engine runs and extended the CI/CD pipeline to spin up isolated test environments per change.
+            Multi-year team effort porting the central Visual FoxPro payroll engine to .NET 10 with zero downtime. Designed point-in-time snapshotting to eliminate drift between parallel engine runs, and extended the CI/CD pipeline to spin up isolated test environments per change.
           </p>
           <div class="tech-tags">
             <span class="tag">C# / .NET 10</span>
@@ -981,34 +981,18 @@
 
         <article class="project-card half">
           <div class="project-meta">
-            <span>Big M Construction · Client</span>
-            <span>2018</span>
-          </div>
-          <h3 class="project-title">Static Site &amp; Hiring Portal</h3>
-          <p class="project-desc">
-            Custom-built marketing site for an oil and gas pipeline construction company. Node.js, NGINX, no framework. Later extended with an internal employment application system where applicants could submit and staff could review submissions in a dashboard.
-          </p>
-          <div class="tech-tags">
-            <span class="tag">Node.js</span>
-            <span class="tag">NGINX</span>
-            <span class="tag">Vanilla JS</span>
-          </div>
-        </article>
-
-        <article class="project-card half">
-          <div class="project-meta">
             <span>University · Embedded</span>
             <span>2022 → 2023</span>
           </div>
-          <h3 class="project-title">Embedded Foundations</h3>
+          <h3 class="project-title">MBED Guitar Hero</h3>
           <p class="project-desc">
-            An MBED-based digital guitar with PLL audio synthesis and register-level work, an analog looping 7-segment display, and a barcode scanner. Coursework, but where the embedded interest started, and the reason I'm still drawn to firmware-adjacent roles.
+            A complete "Guitar Hero" rhythm game built on the MBED LPC1769 — bare-metal C, no RTOS. Real-time audio synthesis driven by hardware timers and PLLs, input handled from a custom-rewired guitar controller, and game state and UI rendered on a 4-line LCD. Coursework, but the starting point for a lasting interest in embedded systems and firmware-adjacent work.
           </p>
           <div class="tech-tags">
-            <span class="tag">MBED</span>
-            <span class="tag">C / C++</span>
+            <span class="tag">MBED LPC1769</span>
+            <span class="tag">Bare-Metal C</span>
             <span class="tag">PLL</span>
-            <span class="tag">Registers</span>
+            <span class="tag">Hardware Timers</span>
           </div>
           <a href="https://www.youtube.com/watch?v=JMT5zlu6mf8" target="_blank" rel="noopener" class="project-link">Watch the MBED Guitar Hero demo →</a>
         </article>
@@ -1020,7 +1004,7 @@
           </div>
           <h3 class="project-title">Death Star Orb Warehouse Scanner</h3>
           <p class="project-desc">
-            A capstone project for a battery warehouse client, intentionally unconventional in form: a staff-mounted scanning "orb" the operator carries through the aisles. Raspberry Pi 4 brain, UPS-backed power for shift-long uptime, an I2C 2D barcode scanner, and audio feedback through an onboard amplifier and speaker. We designed it end-to-end as a team: hardware integration, power management, and the operator-facing audio cues.
+            A capstone project for a battery warehouse client, intentionally unconventional in form: a staff-mounted scanning "orb" the operator carries through the aisles. Raspberry Pi 4 brain, UPS-backed power for shift-long uptime, an I2C 2D barcode scanner, and audio feedback through an onboard amplifier and speaker. Designed end-to-end as a team effort: hardware integration, power management, and the operator-facing audio cues.
           </p>
           <div class="tech-tags">
             <span class="tag">Raspberry Pi 4</span>
@@ -1037,7 +1021,7 @@
           </div>
           <h3 class="project-title">Non-Visual VR Navigation</h3>
           <p class="project-desc">
-            A haptic-only VR navigation experiment exploring whether spatial awareness can be conveyed without any visual channel. I built distance-based pulse modulation to translate proximity into vibration patterns, then ran user trials comparing different haptic feedback styles. The data side was as much of the project as the build: collecting and analyzing trial results to see which patterns actually let users navigate confidently in the dark.
+            A haptic-only VR navigation experiment exploring whether spatial awareness can be conveyed without any visual channel. Distance-based pulse modulation translated proximity into vibration patterns, followed by user trials comparing different haptic feedback styles. The data side was as much of the project as the build: trial results were collected and analyzed to see which patterns actually let users navigate confidently in the dark.
           </p>
           <div class="tech-tags">
             <span class="tag">VR</span>
@@ -1045,6 +1029,22 @@
             <span class="tag">HMI</span>
             <span class="tag">User Trials</span>
             <span class="tag">Pulse Modulation</span>
+          </div>
+        </article>
+
+        <article class="project-card half">
+          <div class="project-meta">
+            <span>Big M Construction · Client</span>
+            <span>2018</span>
+          </div>
+          <h3 class="project-title">Static Site &amp; Hiring Portal</h3>
+          <p class="project-desc">
+            Custom-built marketing site for an oil and gas pipeline construction company. Node.js, NGINX, no framework. Later extended with an internal employment application system where applicants could submit and staff could review submissions in a dashboard.
+          </p>
+          <div class="tech-tags">
+            <span class="tag">Node.js</span>
+            <span class="tag">NGINX</span>
+            <span class="tag">Vanilla JS</span>
           </div>
         </article>
       </div>
@@ -1101,7 +1101,7 @@
             <h4>Founder</h4>
             <div class="org">BuzzIn.Live <span class="sep">·</span> Online</div>
             <p>
-              Designed and implemented a real-time multiplayer quiz platform with over 100,000 monthly players worldwide. Full-stack solo build on a VPS: Node.js backend, NGINX proxy, Socket.IO communication, freemium monetization.
+              Designed and implemented a real-time multiplayer quiz platform with over 100,000 monthly players worldwide. Full-stack solo build on a VPS: Node.js backend, NGINX proxy, Socket.IO communication. Ran on a freemium model for several years before being converted to fully free in July 2025.
             </p>
           </div>
         </div>
@@ -1123,7 +1123,7 @@
             <h4>Farm &amp; Electrical Work</h4>
             <div class="org">Sinclair Family Businesses <span class="sep">·</span> Eagle City, OK</div>
             <p>
-              Two threads of summer work for the family operations. At Sinclair Farms, operated heavy machinery (tractors, combines, sprayers), maintained and repaired equipment, and cared for livestock. At Sinclair Electric, assisted a master electrician on residential service calls and new construction wiring.
+              Two threads of summer work. At Sinclair Farms, operated heavy machinery (tractors, combines, sprayers), maintained and repaired equipment, and cared for livestock. At Sinclair Electric, assisted a master electrician on residential service calls and new construction wiring.
             </p>
           </div>
         </div>
@@ -1157,7 +1157,7 @@
             <li>
               <div>
                 <span class="name">Engineer Intern (EI), Oklahoma</span>
-                <span class="detail">Passed the NCEES Fundamentals of Engineering exam, February 2026. Certified by the Oklahoma State Board of Licensure for Professional Engineers. First step toward Professional Engineer (PE) licensure.</span>
+                <span class="detail">Passed the NCEES Fundamentals of Engineering exam in January 2026, then licensed as an Engineer Intern (EI) by the Oklahoma State Board of Licensure for Professional Engineers in February 2026. First step toward Professional Engineer (PE) licensure.</span>
               </div>
             </li>
             <li>
@@ -1191,13 +1191,13 @@
         <div class="info-card">
           <h3>The <em>short</em> version</h3>
           <p>
-            Computer engineering grad from the University of Oklahoma. Currently a Level IV software developer at Paycom, working on the calculation engine that runs payroll for the company's entire client base. On the side, I run BuzzIn.Live, a multiplayer quiz platform I've maintained since 2018.
+            Computer engineering grad from the University of Oklahoma. Currently a Level IV software developer at Paycom, working on the calculation engine that runs payroll for the company's entire client base. On the side, BuzzIn.Live — a multiplayer quiz platform maintained since 2018.
           </p>
         </div>
         <div class="info-card">
           <h3>What I'm <em>looking</em> for</h3>
           <p>
-            Embedded roles are my top interest; backend and full-stack are a strong parallel track, and I'm open to AI-adjacent infrastructure work where it overlaps. Looking at OKC, in-office or hybrid. U.S. citizen, eligible for security clearance.
+            Embedded roles are the top interest; backend and full-stack are a strong parallel track, with openness to AI-adjacent infrastructure work where it overlaps. Looking at OKC, in-office or hybrid. U.S. citizen, eligible for security clearance.
           </p>
         </div>
       </div>
