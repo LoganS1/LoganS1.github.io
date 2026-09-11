@@ -1,0 +1,137 @@
+/* Logan Sinclair — motion
+   Everything that moves is in here, wrapped in the reduced-motion guard.
+   With motion off, styles.css already draws every element in its finished state. */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  html { scroll-behavior: smooth; }
+
+  /* ---------------------------------------------------------------- */
+  /* Keyframes                                                        */
+  /* ---------------------------------------------------------------- */
+
+  @keyframes light-on {
+    0%   { background: #6d5c3c; box-shadow: none; }
+    55%  { background: #fff3b0;
+           box-shadow: 0 0 14px 5px rgba(245, 213, 71, .7), 0 0 34px 12px rgba(245, 213, 71, .28); }
+    100% { background: var(--amber);
+           box-shadow: 0 0 10px 3px rgba(245, 213, 71, .45), 0 0 26px 8px rgba(245, 213, 71, .16); }
+  }
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 10px 3px rgba(245, 213, 71, .45), 0 0 26px 8px rgba(245, 213, 71, .16); }
+    50%      { box-shadow: 0 0 8px 2px rgba(245, 213, 71, .32), 0 0 20px 6px rgba(245, 213, 71, .10); }
+  }
+  @keyframes twinkle {
+    0%, 84%, 100% { filter: brightness(1);    transform: scale(1); }
+    88%           { filter: brightness(1.55); transform: scale(1.14); }
+    92%           { filter: brightness(.78);  transform: scale(.95); }
+    96%           { filter: brightness(1.25); transform: scale(1.05); }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes settle {
+    from { opacity: 0; transform: rotate(-7deg) translateY(28px) scale(.96); }
+    to   { opacity: 1; transform: rotate(-2deg); }
+  }
+  @keyframes paper-in {
+    from { opacity: 0; transform: rotate(9deg) translate(-16px, 14px); }
+    to   { opacity: 1; transform: rotate(3.5deg); }
+  }
+  @keyframes drift {
+    0%   { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+    6%   { opacity: .85; }
+    25%  { transform: translate(-6vw, 6rem) rotate(-70deg); }
+    50%  { transform: translate(-16vw, 12rem) rotate(-160deg); }
+    75%  { transform: translate(-20vw, 19rem) rotate(-250deg); }
+    92%  { opacity: .85; }
+    100% { transform: translate(-28vw, 26rem) rotate(-330deg); opacity: 0; }
+  }
+  @keyframes fall {
+    0%   { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+    5%   { opacity: .9; }
+    20%  { transform: translate(2.5vw, 6rem) rotate(80deg); }
+    40%  { transform: translate(-2vw, 12rem) rotate(150deg); }
+    60%  { transform: translate(3vw, 18rem) rotate(250deg); }
+    80%  { transform: translate(-1.5vw, 24rem) rotate(330deg); }
+    94%  { opacity: .9; }
+    100% { transform: translate(1.5vw, 30rem) rotate(410deg); opacity: 0; }
+  }
+  @keyframes reveal {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes sun-up {
+    0%   { transform: none; }
+    50%  { transform: translateY(-3px); }
+    100% { transform: none; }
+  }
+
+  /* ---------------------------------------------------------------- */
+  /* Page load: lights on, then the words, then the note settles       */
+  /* ---------------------------------------------------------------- */
+
+  .bulb {
+    animation:
+      light-on .45s ease-out both,
+      glow 7s ease-in-out infinite,
+      twinkle calc(3.1s + var(--i) * .47s) ease-in-out infinite;
+    animation-delay:
+      calc(var(--i) * 90ms),
+      calc(var(--i) * 90ms + .45s + var(--i) * .37s),
+      calc(1.6s + var(--i) * .83s);
+  }
+
+  .hero-copy h1    { animation: rise .8s cubic-bezier(.2, .7, .2, 1) .55s both; }
+  .hero-copy .lede { animation: rise .8s cubic-bezier(.2, .7, .2, 1) .72s both; }
+  .hero-actions,
+  .hero-links      { animation: rise .8s cubic-bezier(.2, .7, .2, 1) .86s both; }
+  .note            { animation: settle 1s cubic-bezier(.2, .8, .25, 1.15) .65s both; }
+  .note::before    { animation: paper-in .9s cubic-bezier(.2, .8, .25, 1.1) .8s both; }
+
+  .leaf-1 { animation: drift 22s linear 3s infinite; }
+  .leaf-2 { animation: drift 30s linear 11s infinite; }
+  .leaf-3 { animation: fall 17s linear 1s infinite; }
+  .leaf-4 { animation: fall 23s linear 7s infinite; }
+  .leaf-5 { animation: fall 19s linear 13s infinite; }
+  .leaf-6 { animation: fall 26s linear 4s infinite; }
+
+  /* ---------------------------------------------------------------- */
+  /* Scroll: entries fade up as they arrive                            */
+  /* ---------------------------------------------------------------- */
+
+  @supports (animation-timeline: view()) {
+    .reveal-group > * {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 40%;
+    }
+  }
+
+  /* ---------------------------------------------------------------- */
+  /* Responses to the visitor                                          */
+  /* ---------------------------------------------------------------- */
+
+  .btn { transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease; }
+  .btn:hover  { transform: translateY(-2px); }
+  .btn-amber:hover { box-shadow: 0 10px 24px rgba(245, 213, 71, .38); }
+  .btn:active { transform: translateY(0) scale(.97); transition-duration: .08s; }
+
+  /* the sun lifts when you hover the wordmark */
+  .brand:hover .mark .sun { animation: sun-up .6s cubic-bezier(.3, 1.4, .5, 1) 1; }
+
+  .nav-links a:not(.btn) { transition: color .2s ease; }
+  .nav-links a:not(.btn)::after { transition: transform .28s cubic-bezier(.2, .7, .2, 1); }
+  .nav-drawer { transition: grid-template-rows .38s cubic-bezier(.2, .7, .2, 1); }
+  .nav-burger span, .nav-burger span::before, .nav-burger span::after {
+    transition: transform .25s ease, top .25s ease, background-color .2s ease;
+  }
+
+  .link-more { transition: border-color .2s ease; }
+  .foot-links a, .hero-links a { transition: color .2s ease; }
+
+  .entry { transition: background-color .25s ease; }
+  .entry .stamp { transition: transform .25s cubic-bezier(.2, .7, .2, 1); }
+  .entry:hover .stamp { transform: rotate(-3deg) translateY(-2px); }
+}
